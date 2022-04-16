@@ -10,7 +10,6 @@ import javax.persistence.Id;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -21,10 +20,11 @@ import static javax.persistence.GenerationType.AUTO;
 public class Cryptocurrency {
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Long id;
+    private Integer id;
     private String name;
     private String abbreviation;
     private String icon;
-    private Long currentValue;
-    private Collection<Date> valuesHistory = new ArrayList<>();
+    private Double value;
+    private Double marketValue;
+    private Collection<Double> valuesHistory = new ArrayList<>();
 }
