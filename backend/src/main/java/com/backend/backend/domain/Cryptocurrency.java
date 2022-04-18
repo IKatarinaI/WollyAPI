@@ -1,16 +1,10 @@
 package com.backend.backend.domain;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -25,6 +19,4 @@ public class Cryptocurrency {
     private String abbreviation;
     private String icon;
     private Double value;
-    private Double marketValue;
-    private Collection<Double> valuesHistory = new ArrayList<>();
 }

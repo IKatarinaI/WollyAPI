@@ -1,42 +1,35 @@
 package com.backend.backend.domain;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
-import static javax.persistence.FetchType.EAGER;
+import javax.persistence.*;
+import java.util.List;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Integer id;
     private String firstName;
     private String lastName;
-    private String username;
     private String password;
     private String email;
-    private Double creditCardBalance;
-    @ManyToMany(fetch = EAGER)
-    private Collection<Cryptocurrency> crytpos = new ArrayList<>();
-    private PasswordEncoder passwordEncoder;
+    private Double currentCardBalance;
 
+    @OneToMany
+    private List<Cryptocurrency> currencyList;
+
+    private String userName;
     public User(String firstName, String lastName, String email, String password){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = email;
         this.email = email;
-        this.password = this.passwordEncoder.encode(password);
+        this.password = password;
+        this.userName = email;
+        this.currentCardBalance = Double.valueOf(50000);
     }
 }

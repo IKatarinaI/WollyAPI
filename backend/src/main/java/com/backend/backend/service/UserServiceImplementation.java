@@ -1,5 +1,6 @@
 package com.backend.backend.service;
 
+import com.backend.backend.domain.Cryptocurrency;
 import com.backend.backend.domain.User;
 import com.backend.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,53 +22,62 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     private final UserRepository userRepository;
 
     @Override
-    public void createUser(String firstName, String lastName, String email, String password) {
+    public User createUser(String firstName, String lastName, String email, String password) {
         User user = new User(firstName, lastName, email, password);
+        userRepository.save(user);
+        return user;
+    }
+
+    public List<Cryptocurrency> getCryptoList(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            throw new UsernameNotFoundException("");
+        }
+        return user.getCurrencyList();
+    }
+
+    public Double getUsersMoney(String email) {
+        User user = userRepository.findByEmail(email);
+        return user.getCurrentCardBalance();
+    }
+
+    public void addMoney(String email, Double value) {
+        User user = userRepository.findByEmail(email);
+        user.setCurrentCardBalance(user.getCurrentCardBalance() + value);
         userRepository.save(user);
     }
 
-    @Override
-    public User getUser(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public void buyCryptocurrency(String email, String cryptoName, Long value) {
+    public void buyCryptocurrency(String email, String cryptoName, Double value) {
         User user = userRepository.findByEmail(email);
-        user.getCrytpos().forEach(crypto -> {
+        user.getCurrencyList().forEach(crypto -> {
             if(crypto.getName().equals(cryptoName)){
                 crypto.setValue(crypto.getValue() + value);
             }
         });
-        user.setCreditCardBalance(user.getCreditCardBalance() - value);
+        user.setCurrentCardBalance(user.getCurrentCardBalance() - value);
     }
 
-    @Override
-    public void sellCryptocurrency(String email, String cryptoName, Long value) {
+    public void sellCryptocurrency(String email, String cryptoName, Double value) {
         User user = userRepository.findByEmail(email);
-        user.getCrytpos().forEach(crypto -> {
+        user.getCurrencyList().forEach(crypto -> {
             if(crypto.getName().equals(cryptoName)){
                 crypto.setValue(crypto.getValue() - value);
             }
         });
-        user.setCreditCardBalance(user.getCreditCardBalance() + value);
+        user.setCurrentCardBalance(user.getCurrentCardBalance() + value);
     }
 
     @Override
-    public void addToBalance(String email, Long value) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        user.setCreditCardBalance(user.getCreditCardBalance() + value);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if(user == null){
-            log.error("User not found in the database");
-            throw new UsernameNotFoundException("User not found in the database");
-        } else {
-            log.info("User found in the database: {}", username);
+        if (user == null){
+            user = userRepository.findByUserName(email);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+
+        if(user == null){
+            throw new UsernameNotFoundException("Email is not registered here.");
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 }
