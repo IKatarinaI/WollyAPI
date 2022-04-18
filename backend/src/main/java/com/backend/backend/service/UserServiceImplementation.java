@@ -70,6 +70,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
+
         if (user == null){
             user = userRepository.findByUserName(email);
         }
@@ -78,6 +79,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             throw new UsernameNotFoundException("Email is not registered here.");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
+        return  new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 }

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
@@ -93,5 +94,12 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/register").toUriString());
         User user = userService.createUser(firstName,lastName, email, password);
         return ResponseEntity.created(uri).body(user);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity login(Map map) {
+        System.out.println(map);
+        return ResponseEntity.ok("success");
     }
 }

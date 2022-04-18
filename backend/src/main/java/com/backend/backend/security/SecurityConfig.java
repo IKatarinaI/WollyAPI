@@ -1,4 +1,5 @@
 package com.backend.backend.security;
+
 import com.backend.backend.security.filter.AuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -26,12 +28,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // custom filter in order to override built in startup /login
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManagerBean());
-        authenticationFilter.setFilterProcessesUrl("/api/v1/login");
+//        authenticationFilter.setFilterProcessesUrl("/api/v1/login");
 
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().anyRequest().permitAll();
-        http.addFilter(authenticationFilter);
+        http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("api/v1/test").authenticated()
+                .and()
+                .authorizeRequests().antMatchers("api/v1/user/**").permitAll()
+                .and()
+                .addFilterBefore(authenticationFilter, AuthenticationFilter.class);
     }
 
     @Bean
