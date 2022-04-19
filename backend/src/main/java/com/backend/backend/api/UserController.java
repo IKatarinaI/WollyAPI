@@ -1,26 +1,38 @@
 package com.backend.backend.api;
 import com.backend.backend.domain.Cryptocurrency;
 import com.backend.backend.domain.User;
+import com.backend.backend.dto.CreateUserRequestDTO;
+import com.backend.backend.mapper.UserMapper;
+import com.backend.backend.security.CustomAuthenticationProvider;
+import com.backend.backend.security.JwtRequest;
+import com.backend.backend.security.JwtResponse;
+import com.backend.backend.security.TokenProvider;
 import com.backend.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
     private final UserService userService;
+    private final UserDetailsService userDetailsService;
+    private final TokenProvider tokenProvider;
+    private final CustomAuthenticationProvider authenticationProvider;
+    private final UserMapper userMapper;
 
     private String getLoggedInUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -85,21 +97,21 @@ public class UserController {
         return ResponseEntity.ok("success");
     }
 
-    // kako da im vratim jwt kao odgovor
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestParam(name="firstName") String firstName,
-                                         @RequestParam(name="lastName") String lastName,
-                                         @RequestParam(name="email") String email,
-                                         @RequestParam(name="password") String password){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/register").toUriString());
-        User user = userService.createUser(firstName,lastName, email, password);
-        return ResponseEntity.created(uri).body(user);
+    public ResponseEntity<User> createUser(@RequestBody @Valid CreateUserRequestDTO userDTO) {
+        return new ResponseEntity<>(userService.create(userDTO), HttpStatus.CREATED);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity login(Map map) {
-        System.out.println(map);
-        return ResponseEntity.ok("success");
+    public ResponseEntity<JwtResponse> loginUser(@RequestBody JwtRequest jwtRequest) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(),
+                                                                                                          jwtRequest.getPassword());
+        Authentication authentication = authenticationProvider.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        if(userService.findByEmail(jwtRequest.getEmail()) == null){
+            throw new SecurityException("Provided email is not registered.");
+        }
+        String jwt=tokenProvider.createToken(authentication);
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }
