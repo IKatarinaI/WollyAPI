@@ -42,26 +42,42 @@ public class UserService {
     }
 
     public List<Cryptocurrency> getCryptoList(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("");
+        }
+        User user = optionalUser.get();
         if(user == null){
             throw new UsernameNotFoundException("");
         }
-        return user;
+        return user.getCurrencyList();
     }
 
     public Double getUsersMoney(String email) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("");
+        }
+        User user = optionalUser.get();
         return user.getCurrentCardBalance();
     }
 
     public void addMoney(String email, Double value) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("");
+        }
+        User user = optionalUser.get();
         user.setCurrentCardBalance(user.getCurrentCardBalance() + value);
         userRepository.save(user);
     }
 
     public void buyCryptocurrency(String email, String cryptoName, Double value) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("");
+        }
+        User user = optionalUser.get();
         user.getCurrencyList().forEach(crypto -> {
             if(crypto.getName().equals(cryptoName)){
                 crypto.setValue(crypto.getValue() + value);
@@ -71,7 +87,11 @@ public class UserService {
     }
 
     public void sellCryptocurrency(String email, String cryptoName, Double value) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("");
+        }
+        User user = optionalUser.get();
         user.getCurrencyList().forEach(crypto -> {
             if(crypto.getName().equals(cryptoName)){
                 crypto.setValue(crypto.getValue() - value);
