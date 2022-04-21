@@ -1,4 +1,5 @@
-package com.backend.backend.domain;
+package com.backend.backend.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

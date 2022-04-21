@@ -1,11 +1,11 @@
-package com.backend.backend.domain;
+package com.backend.backend.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -29,12 +29,4 @@ public class User implements Serializable {
     private List<Cryptocurrency> currencyList;
 
     private String userName;
-    /*public User(String firstName, String lastName, String email, String password){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.userName = email;
-        this.currentCardBalance = Double.valueOf(50000);
-    }*/
 }
