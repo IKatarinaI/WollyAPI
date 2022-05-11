@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  wolly-api:
+    restart: always
+    image: omegadevs/wolly-api:latest
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+volumes:
+  wolly-volume:

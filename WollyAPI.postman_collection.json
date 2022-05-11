@@ -184,7 +184,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMTM3MDQ5fQ.QVgLUMArie4GVI-qqcODslhJUkMxgx2dIrJsRgelxE7oWKwimEXDRKD3Zmx-KtAL1XsdOa95uF96TRxjRTSPqw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxNzUzMDk3fQ.M4FZiYmAfk-8QINs6S2su3sy7eUphTpnKA50BGflYsIN2EXAIQog7-EJkZTvYHPZGpVFCLl2c1AlKSC_wgndSQ",
 									"type": "string"
 								}
 							]
@@ -233,7 +233,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMTM3MDQ5fQ.QVgLUMArie4GVI-qqcODslhJUkMxgx2dIrJsRgelxE7oWKwimEXDRKD3Zmx-KtAL1XsdOa95uF96TRxjRTSPqw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxNzUzMDk3fQ.M4FZiYmAfk-8QINs6S2su3sy7eUphTpnKA50BGflYsIN2EXAIQog7-EJkZTvYHPZGpVFCLl2c1AlKSC_wgndSQ",
 									"type": "string"
 								}
 							]
@@ -279,7 +279,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMTM3MDQ5fQ.QVgLUMArie4GVI-qqcODslhJUkMxgx2dIrJsRgelxE7oWKwimEXDRKD3Zmx-KtAL1XsdOa95uF96TRxjRTSPqw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxNzUzMDk3fQ.M4FZiYmAfk-8QINs6S2su3sy7eUphTpnKA50BGflYsIN2EXAIQog7-EJkZTvYHPZGpVFCLl2c1AlKSC_wgndSQ",
 									"type": "string"
 								}
 							]
@@ -287,7 +287,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/getWallet",
+							"raw": "http://localhost:8080/api/v1/users/wallet",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -297,7 +297,7 @@
 								"api",
 								"v1",
 								"users",
-								"getWallet"
+								"wallet"
 							]
 						}
 					},
@@ -316,7 +316,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMTM3MDQ5fQ.QVgLUMArie4GVI-qqcODslhJUkMxgx2dIrJsRgelxE7oWKwimEXDRKD3Zmx-KtAL1XsdOa95uF96TRxjRTSPqw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxNzQ5OTQwfQ.JYkKj2DBK_np2jk5Xx3HMS0uGsMla5kztanT5iwin4i884-ukWKEiGGwNiUdGQklMPf5Kr-vOaln4_A6nlKmGQ",
 									"type": "string"
 								}
 							]
@@ -324,7 +324,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/addMoney?value=50000",
+							"raw": "http://localhost:8080/api/v1/users/addMoney?value=255",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -339,7 +339,7 @@
 							"query": [
 								{
 									"key": "value",
-									"value": "50000"
+									"value": "255"
 								}
 							]
 						}
@@ -359,7 +359,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMTM3MDQ5fQ.QVgLUMArie4GVI-qqcODslhJUkMxgx2dIrJsRgelxE7oWKwimEXDRKD3Zmx-KtAL1XsdOa95uF96TRxjRTSPqw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxNzUzMDk3fQ.M4FZiYmAfk-8QINs6S2su3sy7eUphTpnKA50BGflYsIN2EXAIQog7-EJkZTvYHPZGpVFCLl2c1AlKSC_wgndSQ",
 									"type": "string"
 								}
 							]
@@ -367,7 +367,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/buyCryptocurrency?cryptoId=04767ea7-44e0-4333-879d-e127ee8678f6&value=307",
+							"raw": "http://localhost:8080/api/v1/users/buyCryptocurrency?cryptoId=0b97e19a-78a1-4003-9972-3c359715fabc&value=307",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -382,7 +382,7 @@
 							"query": [
 								{
 									"key": "cryptoId",
-									"value": "04767ea7-44e0-4333-879d-e127ee8678f6"
+									"value": "0b97e19a-78a1-4003-9972-3c359715fabc"
 								},
 								{
 									"key": "value",
@@ -406,7 +406,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUwNjM0NjkyfQ.pBLXO6h9vX3BS6rwG2_PMGYv3R4ZZVCLOoaeDUjEZI9rEDdyt2kqRTXKtntc4ZE66CezsVugTXjlD3AhkBdrkg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbC5jb20iLCJcIlwiIjoiIiwiZXhwIjoxNjUxMjIyODQyfQ.Nw0mr8oQiBYXGDOrBrBJ67h-u6YeG6znIFW93mAnnuqPgFV6jzpY_1565ZAfWoA0OsHJ6Adod1bMQYUhLIGjCQ",
 									"type": "string"
 								}
 							]
@@ -414,7 +414,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/sellCryptocurrency?cryptoId=81f97f12-272c-409d-a4af-00620470043b&value=250",
+							"raw": "http://localhost:8080/api/v1/users/sellCryptocurrency?cryptoId=04767ea7-44e0-4333-879d-e127ee8678f6&value=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -429,12 +429,63 @@
 							"query": [
 								{
 									"key": "cryptoId",
-									"value": "81f97f12-272c-409d-a4af-00620470043b"
+									"value": "04767ea7-44e0-4333-879d-e127ee8678f6"
 								},
 								{
 									"key": "value",
-									"value": "250"
+									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Binance",
+			"item": [
+				{
+					"name": "Exchange info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.binance.com/api/v3/exchangeInfo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"binance",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"exchangeInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://data.messari.io/api/v1/assets/btc/metrics",
+							"protocol": "https",
+							"host": [
+								"data",
+								"messari",
+								"io"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assets",
+								"btc",
+								"metrics"
 							]
 						}
 					},
